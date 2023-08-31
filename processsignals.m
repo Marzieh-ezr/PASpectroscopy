@@ -25,13 +25,13 @@ end
 %S_exp_lowpass=lowpassfilter(S_exp, 5e-9, 0.06);
 
 %correct offset of experimental signal.
-S_exp=S_exp-mean(S_exp(1:200));
+S_exp=S_exp-mean(S_exp(1:150));
 
 %match time delays of experimental and simulated signals
 index_S_exp=find(S_exp==max(S_exp(:)));
-index_S_model=find(S_model==max(S_model(:)));
+%index_S_model=find(S_model==max(S_model(:)));
 %delay=index_S_model-index_S_exp;%based on finding maximum of the signal
-delay=finddelay(S_exp,S_model)+1;%based on finding maximum cross corralation
+delay=finddelay(S_exp,S_model);%based on finding maximum cross corralation
 size_exp=size(S_exp);
 size_model=size(S_model);
 
@@ -53,8 +53,8 @@ dx=1/sample_rate*Medium.sound_speed_sample;
 x_exp=dx:dx:dx*size_exp(1,2);
 x_model=dx:dx:dx*size_model(1,2);
 
-[X_exp, Y_exp] = selectsignal(x_exp,S_exp,Geometry.distance/0.955,Geometry.cuvette_length/1.4);
-[X_model, Y_model] = selectsignal(x_model,S_model,Geometry.distance/0.955,Geometry.cuvette_length/1.4);
+[X_exp, Y_exp] = selectsignal(x_exp,S_exp,Geometry.distance/0.96,Geometry.cuvette_length/1.45);
+[X_model, Y_model] = selectsignal(x_model,S_model,Geometry.distance/0.96,Geometry.cuvette_length/1.45);
 %normalizing signal.
 Y_model=Y_model/max(Y_model(:));
 Y_exp=a*Y_exp/max(Y_exp(:));

@@ -48,7 +48,7 @@ H_4+round(((Geometry.distance+Geometry.sensor_thikness)/Model.dx))-1,1:round(Geo
     %H_4+round(((Geometry.distance+Geometry.sensor_thikness)/Model.dx))-1,...
     %round(Geometry.l/2/Model.dy)].'; 
 
-input_args = { 'DataCast', 'gpuArray-single','PMLSize', 150};
+input_args = { 'DataCast', 'gpuArray-single','PMLSize', 100};
 % run the simulation
 sensor_data = kspaceFirstOrderAS(kgrid, medium, source, sensor, input_args{:}, 'PlotSim', false,...
     'PlotLayout', false,'Smooth',[true,false,false]);
